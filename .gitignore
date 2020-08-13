@@ -1,0 +1,70 @@
+*.class
+
+#Javadoc files
+dist/
+.publish/
+
+#javadoc overview files generated from README.md
+readme_overview.html
+**/javadocTemp/**
+**/sourceTemp/**
+
+#External libs
+extlib/
+
+# Auth files
+*.auth
+
+# Local checkstyle
+*.checkstyle
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Tooling
+node_modules
+packages
+
+# Eclipse
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# Other Tooling
+.classpath
+.project
+target
+.idea
+*.iml
+
+# Mac OS
+.DS_Store
+.DS_Store?
+
+# Windows
+Thumbs.db
+
+# reduced pom files should not be included
+dependency-reduced-pom.xml
+package-lock.json
+
+# VS Code
+.vscode/
+.factorypath
+jacoco.exec
