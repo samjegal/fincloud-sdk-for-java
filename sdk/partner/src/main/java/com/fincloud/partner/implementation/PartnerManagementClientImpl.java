@@ -33,7 +33,7 @@ public class PartnerManagementClientImpl extends ServiceClient implements Partne
      * Initializes an instance of PartnerManagementClient client.
      */
     public PartnerManagementClientImpl() {
-        this("https://fin-ncloud.apigw.fin-ntruss.com/billing/v2");
+        this("https://fin-ncloud.apigw.fin-ntruss.com");
     }
 
     /**
@@ -53,7 +53,7 @@ public class PartnerManagementClientImpl extends ServiceClient implements Partne
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public PartnerManagementClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://fin-ncloud.apigw.fin-ntruss.com/billing/v2", clientBuilder, restBuilder);
+        this("https://fin-ncloud.apigw.fin-ntruss.com", clientBuilder, restBuilder);
         initialize();
     }
 

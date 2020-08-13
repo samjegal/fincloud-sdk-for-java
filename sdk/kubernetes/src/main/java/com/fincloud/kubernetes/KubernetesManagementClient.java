@@ -20,7 +20,7 @@ public interface KubernetesManagementClient {
     /**
      * The default base URL.
      */
-    String DEFAULT_BASE_URL = "https://nks.apigw.fin-ntruss.com/nks/v2";
+    String DEFAULT_BASE_URL = "https://nks.apigw.fin-ntruss.com";
 
     /**
      * Gets the KubernetesClusters object to access its operations.

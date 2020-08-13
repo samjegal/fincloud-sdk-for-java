@@ -57,15 +57,15 @@ public class FilesImpl implements Files {
      */
     interface FilesService {
         @Multipart
-        @POST("files")
+        @POST("api/v1/files")
         Observable<Response<ResponseBody>> create(@Header("X-NCP-LANG") String xNCPLANG, @Part("fileList") RequestBody fileList);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.Files get" })
-        @GET("files/{tempRequestId}")
+        @GET("api/v1/files/{tempRequestId}")
         Observable<Response<ResponseBody>> get(@Path("tempRequestId") String tempRequestId, @Header("X-NCP-LANG") String xNCPLANG);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.Files delete" })
-        @HTTP(path = "files/{tempRequestId}", method = "DELETE", hasBody = true)
+        @HTTP(path = "api/v1/files/{tempRequestId}", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete(@Path("tempRequestId") String tempRequestId, @Header("X-NCP-LANG") String xNCPLANG);
 
     }

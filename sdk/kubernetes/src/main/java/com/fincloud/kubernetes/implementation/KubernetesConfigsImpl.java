@@ -49,11 +49,11 @@ public class KubernetesConfigsImpl implements KubernetesConfigs {
      */
     interface KubernetesConfigsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesConfigs get" })
-        @GET("clusters/{uuid}/kubeconfig")
+        @GET("nks/v2/clusters/{uuid}/kubeconfig")
         Observable<Response<ResponseBody>> get(@Path("uuid") String uuid);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesConfigs reset" })
-        @PATCH("clusters/{uuid}/kubeconfig/reset")
+        @PATCH("nks/v2/clusters/{uuid}/kubeconfig/reset")
         Observable<Response<ResponseBody>> reset(@Path("uuid") String uuid);
 
     }

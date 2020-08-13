@@ -20,7 +20,7 @@ public interface KmsManagementClient {
     /**
      * The default base URL.
      */
-    String DEFAULT_BASE_URL = "https://kms.apigw.ntruss.com/key/v1";
+    String DEFAULT_BASE_URL = "https://kms.apigw.ntruss.com";
 
     /**
      * Gets the KMS object to access its operations.

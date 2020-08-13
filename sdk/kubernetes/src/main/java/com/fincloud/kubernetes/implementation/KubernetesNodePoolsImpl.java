@@ -55,19 +55,19 @@ public class KubernetesNodePoolsImpl implements KubernetesNodePools {
      */
     interface KubernetesNodePoolsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesNodePools get" })
-        @GET("clusters/{uuid}/node-pool")
+        @GET("nks/v2/clusters/{uuid}/node-pool")
         Observable<Response<ResponseBody>> get(@Path("uuid") String uuid);
 
         @Headers({ "Content-Type: application/json;charset=UTF-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesNodePools create" })
-        @POST("clusters/{uuid}/node-pool")
+        @POST("nks/v2/clusters/{uuid}/node-pool")
         Observable<Response<ResponseBody>> create(@Path("uuid") String uuid, @Body KubernetesNodePoolRequestParameter parameters);
 
         @Headers({ "Content-Type: application/json;charset=UTF-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesNodePools update" })
-        @PATCH("clusters/{uuid}/node-pool/{instanceNo}")
+        @PATCH("nks/v2/clusters/{uuid}/node-pool/{instanceNo}")
         Observable<Response<ResponseBody>> update(@Path("uuid") String uuid, @Path("instanceNo") String instanceNo, @Body KubernetesNodePoolUpdateParameter parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesNodePools delete" })
-        @HTTP(path = "clusters/{uuid}/node-pool/{instanceNo}", method = "DELETE", hasBody = true)
+        @HTTP(path = "nks/v2/clusters/{uuid}/node-pool/{instanceNo}", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete(@Path("uuid") String uuid, @Path("instanceNo") String instanceNo);
 
     }

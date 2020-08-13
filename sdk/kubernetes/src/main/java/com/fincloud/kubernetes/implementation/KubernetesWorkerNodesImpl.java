@@ -48,7 +48,7 @@ public class KubernetesWorkerNodesImpl implements KubernetesWorkerNodes {
      */
     interface KubernetesWorkerNodesService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesWorkerNodes get" })
-        @GET("clusters/{uuid}/nodes")
+        @GET("nks/v2/clusters/{uuid}/nodes")
         Observable<Response<ResponseBody>> get(@Path("uuid") String uuid);
 
     }

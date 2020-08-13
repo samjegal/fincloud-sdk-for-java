@@ -59,31 +59,31 @@ public class AddressBooksImpl implements AddressBooks {
      */
     interface AddressBooksService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.AddressBooks create" })
-        @POST("address-book")
+        @POST("api/v1/address-book")
         Observable<Response<ResponseBody>> create(@Header("X-NCP-LANG") String xNCPLANG, @Body AddressBookGenerateRequest requestBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.AddressBooks get" })
-        @GET("address-book")
+        @GET("api/v1/address-book")
         Observable<Response<ResponseBody>> get(@Header("X-NCP-LANG") String xNCPLANG);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.AddressBooks delete" })
-        @HTTP(path = "address-book", method = "DELETE", hasBody = true)
+        @HTTP(path = "api/v1/address-book", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete(@Header("X-NCP-LANG") String xNCPLANG);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.AddressBooks deleteRecipientGroup" })
-        @HTTP(path = "address-book/recipient-groups", method = "DELETE", hasBody = true)
+        @HTTP(path = "api/v1/address-book/recipient-groups", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteRecipientGroup(@Header("X-NCP-LANG") String xNCPLANG, @Query("groupName") String groupName);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.AddressBooks deleteAddress" })
-        @HTTP(path = "address-book/address", method = "DELETE", hasBody = true)
+        @HTTP(path = "api/v1/address-book/address", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteAddress(@Header("X-NCP-LANG") String xNCPLANG, @Body AddressBookDeleteAddressRequest requestBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.AddressBooks deleteRecipientGroupByAddress" })
-        @HTTP(path = "address-book/recipient-groups/address", method = "DELETE", hasBody = true)
+        @HTTP(path = "api/v1/address-book/recipient-groups/address", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteRecipientGroupByAddress(@Body AddressBookDeleteRelationRequest requestBody, @Header("X-NCP-LANG") String xNCPLANG);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.AddressBooks deleteEmptyRecipientGroup" })
-        @HTTP(path = "address-book/recipient-groups/address/empty", method = "DELETE", hasBody = true)
+        @HTTP(path = "api/v1/address-book/recipient-groups/address/empty", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteEmptyRecipientGroup(@Header("X-NCP-LANG") String xNCPLANG, @Query("groupName") String groupName);
 
     }

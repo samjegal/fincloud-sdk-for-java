@@ -51,19 +51,19 @@ public class PartnersImpl implements Partners {
      */
     interface PartnersService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.partner.Partners getContractProductDemandList" })
-        @GET("getContractProductDemandList")
+        @GET("billing/v2/getContractProductDemandList")
         Observable<Response<ResponseBody>> getContractProductDemandList(@Query("responseFormatType") String responseFormatType, @Query("pageNo") Integer pageNo, @Query("pageSize") Integer pageSize, @Query("startMonth") String startMonth, @Query("endMonth") String endMonth, @Query("loginId") String loginId);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.partner.Partners getDemandProductList" })
-        @GET("getDemandProductList")
+        @GET("billing/v2/getDemandProductList")
         Observable<Response<ResponseBody>> getDemandProductList(@Query("responseFormatType") String responseFormatType, @Query("pageNo") Integer pageNo, @Query("pageSize") Integer pageSize, @Query("startMonth") String startMonth, @Query("endMonth") String endMonth, @Query("loginId") String loginId);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.partner.Partners getDemandList" })
-        @GET("getDemandList")
+        @GET("billing/v2/getDemandList")
         Observable<Response<ResponseBody>> getDemandList(@Query("responseFormatType") String responseFormatType, @Query("pageNo") Integer pageNo, @Query("pageSize") Integer pageSize, @Query("startMonth") String startMonth, @Query("endMonth") String endMonth, @Query("loginId") String loginId);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.partner.Partners getPartnerDemandList" })
-        @GET("getPartnerDemandList")
+        @GET("billing/v2/getPartnerDemandList")
         Observable<Response<ResponseBody>> getPartnerDemandList(@Query("responseFormatType") String responseFormatType, @Query("pageNo") Integer pageNo, @Query("pageSize") Integer pageSize, @Query("startMonth") String startMonth, @Query("endMonth") String endMonth, @Query("loginId") String loginId);
 
     }

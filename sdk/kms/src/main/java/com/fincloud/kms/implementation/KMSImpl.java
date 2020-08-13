@@ -55,27 +55,27 @@ public class KMSImpl implements KMS {
      */
     interface KMSService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kms.KMS createCustomKey" })
-        @POST("{keyTag}/createCustomKey")
+        @POST("key/v1/{keyTag}/createCustomKey")
         Observable<Response<ResponseBody>> createCustomKey(@Path("keyTag") String keyTag, @Body CreateCustomKeyRequest parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kms.KMS descrypt" })
-        @POST("{keyTag}/decrypt")
+        @POST("key/v1/{keyTag}/decrypt")
         Observable<Response<ResponseBody>> descrypt(@Path("keyTag") String keyTag, @Body DecryptRequestKey parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kms.KMS encrypt" })
-        @POST("{keyTag}/encrypt")
+        @POST("key/v1/{keyTag}/encrypt")
         Observable<Response<ResponseBody>> encrypt(@Path("keyTag") String keyTag, @Body EncryptRequestKey parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kms.KMS reencrypt" })
-        @POST("{keyTag}/reencrypt")
+        @POST("key/v1/{keyTag}/reencrypt")
         Observable<Response<ResponseBody>> reencrypt(@Path("keyTag") String keyTag, @Body ReencryptRequestKey parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kms.KMS sign" })
-        @POST("{keyTag}/sign")
+        @POST("key/v1/{keyTag}/sign")
         Observable<Response<ResponseBody>> sign(@Path("keyTag") String keyTag, @Body SignRequest parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kms.KMS verify" })
-        @POST("{keyTag}/verify")
+        @POST("key/v1/{keyTag}/verify")
         Observable<Response<ResponseBody>> verify(@Path("keyTag") String keyTag, @Body VerifyRequest parameters);
 
     }

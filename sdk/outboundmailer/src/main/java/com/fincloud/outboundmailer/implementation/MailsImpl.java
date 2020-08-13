@@ -60,23 +60,23 @@ public class MailsImpl implements Mails {
      */
     interface MailsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.Mails create" })
-        @POST("mails")
+        @POST("api/v1/mails")
         Observable<Response<ResponseBody>> create(@Body MailRequestParameter parameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.Mails get" })
-        @GET("mails/{mailId}")
+        @GET("api/v1/mails/{mailId}")
         Observable<Response<ResponseBody>> get(@Path("mailId") String mailId, @Header("X-NCP-LANG") String xNCPLANG);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.Mails getRequestList" })
-        @GET("mails/requests")
+        @GET("api/v1/mails/requests")
         Observable<Response<ResponseBody>> getRequestList(@Header("X-NCP-LANG") String xNCPLANG, @Query("dispatchType") String dispatchType, @Query("endDateTime") String endDateTime, @Query("endUtc") Long endUtc, @Query("mailId") String mailId, @Query("page") Integer page, @Query("recipientAddress") String recipientAddress, @Query("senderAddress") String senderAddress, @Query("sendStatus") String sendStatus, @Query("size") Integer size, @Query("sort") String sort, @Query("startDateTime") String startDateTime, @Query("startUtc") Long startUtc, @Query("templateSid") Integer templateSid, @Query("title") String title);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.Mails getListByRequestId" })
-        @GET("mails/requests/{requestId}/mails")
+        @GET("api/v1/mails/requests/{requestId}/mails")
         Observable<Response<ResponseBody>> getListByRequestId(@Path("requestId") String requestId, @Header("X-NCP-LANG") String xNCPLANG, @Query("mailId") String mailId, @Query("page") Integer page, @Query("recipientAddress") String recipientAddress, @Query("sendStatus") String sendStatus, @Query("size") Integer size, @Query("sort") String sort, @Query("title") String title);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.Mails getStatusByRequestId" })
-        @GET("mails/requests/{requestId}/status")
+        @GET("api/v1/mails/requests/{requestId}/status")
         Observable<Response<ResponseBody>> getStatusByRequestId(@Path("requestId") String requestId, @Header("X-NCP-LANG") String xNCPLANG, @Query("mailId") String mailId, @Query("page") Integer page, @Query("recipientAddress") String recipientAddress, @Query("sendStatus") String sendStatus, @Query("size") Integer size, @Query("sort") String sort, @Query("title") String title);
 
     }

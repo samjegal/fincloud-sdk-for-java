@@ -75,7 +75,7 @@ public class KubernetesManagementClientImpl extends ServiceClient implements Kub
      * Initializes an instance of KubernetesManagementClient client.
      */
     public KubernetesManagementClientImpl() {
-        this("https://nks.apigw.fin-ntruss.com/nks/v2");
+        this("https://nks.apigw.fin-ntruss.com");
     }
 
     /**
@@ -95,7 +95,7 @@ public class KubernetesManagementClientImpl extends ServiceClient implements Kub
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public KubernetesManagementClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://nks.apigw.fin-ntruss.com/nks/v2", clientBuilder, restBuilder);
+        this("https://nks.apigw.fin-ntruss.com", clientBuilder, restBuilder);
         initialize();
     }
 

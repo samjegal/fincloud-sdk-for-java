@@ -20,7 +20,7 @@ public interface PartnerManagementClient {
     /**
      * The default base URL.
      */
-    String DEFAULT_BASE_URL = "https://fin-ncloud.apigw.fin-ntruss.com/billing/v2";
+    String DEFAULT_BASE_URL = "https://fin-ncloud.apigw.fin-ntruss.com";
 
     /**
      * Gets the Partners object to access its operations.

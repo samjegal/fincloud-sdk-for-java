@@ -20,7 +20,7 @@ public interface CloudOutboundMailerManagementClient {
     /**
      * The default base URL.
      */
-    String DEFAULT_BASE_URL = "https://mail.apigw.fin-ntruss.com/api/v1";
+    String DEFAULT_BASE_URL = "https://mail.apigw.fin-ntruss.com";
 
     /**
      * Gets the Mails object to access its operations.

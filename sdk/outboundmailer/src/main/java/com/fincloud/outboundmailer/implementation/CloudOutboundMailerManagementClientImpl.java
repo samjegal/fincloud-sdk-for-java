@@ -75,7 +75,7 @@ public class CloudOutboundMailerManagementClientImpl extends ServiceClient imple
      * Initializes an instance of CloudOutboundMailerManagementClient client.
      */
     public CloudOutboundMailerManagementClientImpl() {
-        this("https://mail.apigw.fin-ntruss.com/api/v1");
+        this("https://mail.apigw.fin-ntruss.com");
     }
 
     /**
@@ -95,7 +95,7 @@ public class CloudOutboundMailerManagementClientImpl extends ServiceClient imple
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public CloudOutboundMailerManagementClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://mail.apigw.fin-ntruss.com/api/v1", clientBuilder, restBuilder);
+        this("https://mail.apigw.fin-ntruss.com", clientBuilder, restBuilder);
         initialize();
     }
 

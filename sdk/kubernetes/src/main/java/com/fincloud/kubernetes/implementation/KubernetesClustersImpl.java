@@ -54,19 +54,19 @@ public class KubernetesClustersImpl implements KubernetesClusters {
      */
     interface KubernetesClustersService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesClusters list" })
-        @GET("clusters")
+        @GET("nks/v2/clusters")
         Observable<Response<ResponseBody>> list();
 
         @Headers({ "Content-Type: application/json;charset=UTF-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesClusters create" })
-        @POST("clusters")
+        @POST("nks/v2/clusters")
         Observable<Response<ResponseBody>> create(@Body KubernetesClusterRequestParameter parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesClusters get" })
-        @GET("clusters/{uuid}")
+        @GET("nks/v2/clusters/{uuid}")
         Observable<Response<ResponseBody>> get(@Path("uuid") String uuid);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.kubernetes.KubernetesClusters delete" })
-        @HTTP(path = "clusters/{uuid}", method = "DELETE", hasBody = true)
+        @HTTP(path = "nks/v2/clusters/{uuid}", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete(@Path("uuid") String uuid);
 
     }

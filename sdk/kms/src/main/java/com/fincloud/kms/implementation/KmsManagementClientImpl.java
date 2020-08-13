@@ -33,7 +33,7 @@ public class KmsManagementClientImpl extends ServiceClient implements KmsManagem
      * Initializes an instance of KmsManagementClient client.
      */
     public KmsManagementClientImpl() {
-        this("https://kms.apigw.ntruss.com/key/v1");
+        this("https://kms.apigw.ntruss.com");
     }
 
     /**
@@ -53,7 +53,7 @@ public class KmsManagementClientImpl extends ServiceClient implements KmsManagem
      * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
     public KmsManagementClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://kms.apigw.ntruss.com/key/v1", clientBuilder, restBuilder);
+        this("https://kms.apigw.ntruss.com", clientBuilder, restBuilder);
         initialize();
     }
 

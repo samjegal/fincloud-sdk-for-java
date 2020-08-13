@@ -50,7 +50,7 @@ public class UnsubscribersImpl implements Unsubscribers {
      */
     interface UnsubscribersService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.outboundmailer.Unsubscribers get" })
-        @GET("unsubscribers")
+        @GET("api/v1/unsubscribers")
         Observable<Response<ResponseBody>> get(@Header("X-NCP-LANG") String xNCPLANG, @Query("emailAddress") String emailAddress, @Query("endDateTime") String endDateTime, @Query("endUtc") Long endUtc, @Query("isRegByManager") Boolean isRegByManager, @Query("page") Integer page, @Query("size") Integer size, @Query("sort") String sort, @Query("startDateTime") String startDateTime, @Query("startUtc") Long startUtc);
 
     }
