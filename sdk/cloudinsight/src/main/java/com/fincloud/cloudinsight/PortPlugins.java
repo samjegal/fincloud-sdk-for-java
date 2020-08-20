@@ -4,7 +4,9 @@
 
 package com.fincloud.cloudinsight;
 
+import com.fincloud.cloudinsight.models.PortPluginDetailResponse;
 import com.fincloud.cloudinsight.models.PortPluginParameter;
+import com.fincloud.cloudinsight.models.PortPluginRequest;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
@@ -26,7 +28,7 @@ public interface PortPlugins {
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    void create(PortPluginParameter parameters);
+    void create(PortPluginRequest parameters);
 
     /**
      * Port Plugin을 설정.
@@ -36,7 +38,7 @@ public interface PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> createAsync(PortPluginParameter parameters, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> createAsync(PortPluginRequest parameters, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Port Plugin을 설정.
@@ -45,7 +47,7 @@ public interface PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> createAsync(PortPluginParameter parameters);
+    Observable<Void> createAsync(PortPluginRequest parameters);
 
     /**
      * Port Plugin을 설정.
@@ -54,7 +56,7 @@ public interface PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> createWithServiceResponseAsync(PortPluginParameter parameters);
+    Observable<ServiceResponse<Void>> createWithServiceResponseAsync(PortPluginRequest parameters);
 
     /**
      * 사용자의 Port Plugin 설정을 조회.
@@ -98,9 +100,9 @@ public interface PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PortPluginParameter object if successful.
+     * @return the PortPluginDetailResponse object if successful.
      */
-    PortPluginParameter get(String instanceNo);
+    PortPluginDetailResponse get(String instanceNo);
 
     /**
      * 서버 인스턴스에 적용된 Port Plugin 설정을 조회.
@@ -110,24 +112,24 @@ public interface PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<PortPluginParameter> getAsync(String instanceNo, final ServiceCallback<PortPluginParameter> serviceCallback);
+    ServiceFuture<PortPluginDetailResponse> getAsync(String instanceNo, final ServiceCallback<PortPluginDetailResponse> serviceCallback);
 
     /**
      * 서버 인스턴스에 적용된 Port Plugin 설정을 조회.
      *
      * @param instanceNo 인스턴스 번호
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PortPluginParameter object
+     * @return the observable to the PortPluginDetailResponse object
      */
-    Observable<PortPluginParameter> getAsync(String instanceNo);
+    Observable<PortPluginDetailResponse> getAsync(String instanceNo);
 
     /**
      * 서버 인스턴스에 적용된 Port Plugin 설정을 조회.
      *
      * @param instanceNo 인스턴스 번호
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PortPluginParameter object
+     * @return the observable to the PortPluginDetailResponse object
      */
-    Observable<ServiceResponse<PortPluginParameter>> getWithServiceResponseAsync(String instanceNo);
+    Observable<ServiceResponse<PortPluginDetailResponse>> getWithServiceResponseAsync(String instanceNo);
 
 }

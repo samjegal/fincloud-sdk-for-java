@@ -6,9 +6,9 @@ package com.fincloud.cloudinsight.implementation;
 
 import retrofit2.Retrofit;
 import com.fincloud.cloudinsight.Datas;
-import com.fincloud.cloudinsight.models.CloudInsightDataInfoParameter;
-import com.fincloud.cloudinsight.models.CloudInsightQueryMultipleParameter;
-import com.fincloud.cloudinsight.models.CloudInsightQueryParameter;
+import com.fincloud.cloudinsight.models.MultipleDataParameter;
+import com.fincloud.cloudinsight.models.QueryMultipleRequest;
+import com.fincloud.cloudinsight.models.QueryRequest;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
@@ -51,86 +51,18 @@ public class DatasImpl implements Datas {
      * used by Retrofit to perform actually REST calls.
      */
     interface DatasService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.Datas preview" })
-        @POST("cw_fea/real/cw/api/data/chart/preview")
-        Observable<Response<ResponseBody>> preview();
-
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.Datas query" })
         @POST("cw_fea/real/cw/api/data/query")
-        Observable<Response<ResponseBody>> query(@Body CloudInsightQueryParameter parameters);
+        Observable<Response<ResponseBody>> query(@Body QueryRequest parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.Datas queryMultiple" })
         @POST("cw_fea/real/cw/api/data/query/multiple")
-        Observable<Response<ResponseBody>> queryMultiple(@Body CloudInsightQueryMultipleParameter parameters);
+        Observable<Response<ResponseBody>> queryMultiple(@Body QueryMultipleRequest parameters);
 
     }
 
     /**
-     * Metric information for the data to be retrieved.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    public void preview() {
-        previewWithServiceResponseAsync().toBlocking().single().body();
-    }
-
-    /**
-     * Metric information for the data to be retrieved.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<Void> previewAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(previewWithServiceResponseAsync(), serviceCallback);
-    }
-
-    /**
-     * Metric information for the data to be retrieved.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> previewAsync() {
-        return previewWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Metric information for the data to be retrieved.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> previewWithServiceResponseAsync() {
-        return service.preview()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = previewDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> previewDelegate(Response<ResponseBody> response) throws RestException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .build(response);
-    }
-
-    /**
-     * Get widget data preview for dashboard widget.
+     * Cloud Insight에서 수집한 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -138,30 +70,30 @@ public class DatasImpl implements Datas {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;List&lt;Double&gt;&gt; object if successful.
      */
-    public List<List<Double>> query(CloudInsightQueryParameter parameters) {
+    public List<List<Double>> query(QueryRequest parameters) {
         return queryWithServiceResponseAsync(parameters).toBlocking().single().body();
     }
 
     /**
-     * Get widget data preview for dashboard widget.
+     * Cloud Insight에서 수집한 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<List<Double>>> queryAsync(CloudInsightQueryParameter parameters, final ServiceCallback<List<List<Double>>> serviceCallback) {
+    public ServiceFuture<List<List<Double>>> queryAsync(QueryRequest parameters, final ServiceCallback<List<List<Double>>> serviceCallback) {
         return ServiceFuture.fromResponse(queryWithServiceResponseAsync(parameters), serviceCallback);
     }
 
     /**
-     * Get widget data preview for dashboard widget.
+     * Cloud Insight에서 수집한 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;Double&gt;&gt; object
      */
-    public Observable<List<List<Double>>> queryAsync(CloudInsightQueryParameter parameters) {
+    public Observable<List<List<Double>>> queryAsync(QueryRequest parameters) {
         return queryWithServiceResponseAsync(parameters).map(new Func1<ServiceResponse<List<List<Double>>>, List<List<Double>>>() {
             @Override
             public List<List<Double>> call(ServiceResponse<List<List<Double>>> response) {
@@ -171,13 +103,13 @@ public class DatasImpl implements Datas {
     }
 
     /**
-     * Get widget data preview for dashboard widget.
+     * Cloud Insight에서 수집한 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;Double&gt;&gt; object
      */
-    public Observable<ServiceResponse<List<List<Double>>>> queryWithServiceResponseAsync(CloudInsightQueryParameter parameters) {
+    public Observable<ServiceResponse<List<List<Double>>>> queryWithServiceResponseAsync(QueryRequest parameters) {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
@@ -199,68 +131,71 @@ public class DatasImpl implements Datas {
     private ServiceResponse<List<List<Double>>> queryDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<List<List<Double>>, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<List<Double>>>() { }.getType())
+                .register(400, new TypeToken<Void>() { }.getType())
+                .register(401, new TypeToken<Void>() { }.getType())
+                .register(500, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
     /**
-     * Query multiple metric data for a specific product with specified criteria.
+     * Cloud Insight에서 수집한 여러개의 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the List&lt;CloudInsightDataInfoParameter&gt; object if successful.
+     * @return the List&lt;MultipleDataParameter&gt; object if successful.
      */
-    public List<CloudInsightDataInfoParameter> queryMultiple(CloudInsightQueryMultipleParameter parameters) {
+    public List<MultipleDataParameter> queryMultiple(QueryMultipleRequest parameters) {
         return queryMultipleWithServiceResponseAsync(parameters).toBlocking().single().body();
     }
 
     /**
-     * Query multiple metric data for a specific product with specified criteria.
+     * Cloud Insight에서 수집한 여러개의 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<CloudInsightDataInfoParameter>> queryMultipleAsync(CloudInsightQueryMultipleParameter parameters, final ServiceCallback<List<CloudInsightDataInfoParameter>> serviceCallback) {
+    public ServiceFuture<List<MultipleDataParameter>> queryMultipleAsync(QueryMultipleRequest parameters, final ServiceCallback<List<MultipleDataParameter>> serviceCallback) {
         return ServiceFuture.fromResponse(queryMultipleWithServiceResponseAsync(parameters), serviceCallback);
     }
 
     /**
-     * Query multiple metric data for a specific product with specified criteria.
+     * Cloud Insight에서 수집한 여러개의 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;CloudInsightDataInfoParameter&gt; object
+     * @return the observable to the List&lt;MultipleDataParameter&gt; object
      */
-    public Observable<List<CloudInsightDataInfoParameter>> queryMultipleAsync(CloudInsightQueryMultipleParameter parameters) {
-        return queryMultipleWithServiceResponseAsync(parameters).map(new Func1<ServiceResponse<List<CloudInsightDataInfoParameter>>, List<CloudInsightDataInfoParameter>>() {
+    public Observable<List<MultipleDataParameter>> queryMultipleAsync(QueryMultipleRequest parameters) {
+        return queryMultipleWithServiceResponseAsync(parameters).map(new Func1<ServiceResponse<List<MultipleDataParameter>>, List<MultipleDataParameter>>() {
             @Override
-            public List<CloudInsightDataInfoParameter> call(ServiceResponse<List<CloudInsightDataInfoParameter>> response) {
+            public List<MultipleDataParameter> call(ServiceResponse<List<MultipleDataParameter>> response) {
                 return response.body();
             }
         });
     }
 
     /**
-     * Query multiple metric data for a specific product with specified criteria.
+     * Cloud Insight에서 수집한 여러개의 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;CloudInsightDataInfoParameter&gt; object
+     * @return the observable to the List&lt;MultipleDataParameter&gt; object
      */
-    public Observable<ServiceResponse<List<CloudInsightDataInfoParameter>>> queryMultipleWithServiceResponseAsync(CloudInsightQueryMultipleParameter parameters) {
+    public Observable<ServiceResponse<List<MultipleDataParameter>>> queryMultipleWithServiceResponseAsync(QueryMultipleRequest parameters) {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
         Validator.validate(parameters);
         return service.queryMultiple(parameters)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<CloudInsightDataInfoParameter>>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<MultipleDataParameter>>>>() {
                 @Override
-                public Observable<ServiceResponse<List<CloudInsightDataInfoParameter>>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<List<MultipleDataParameter>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<List<CloudInsightDataInfoParameter>> clientResponse = queryMultipleDelegate(response);
+                        ServiceResponse<List<MultipleDataParameter>> clientResponse = queryMultipleDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -269,9 +204,12 @@ public class DatasImpl implements Datas {
             });
     }
 
-    private ServiceResponse<List<CloudInsightDataInfoParameter>> queryMultipleDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<List<CloudInsightDataInfoParameter>, RestException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<List<CloudInsightDataInfoParameter>>() { }.getType())
+    private ServiceResponse<List<MultipleDataParameter>> queryMultipleDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<List<MultipleDataParameter>, RestException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<List<MultipleDataParameter>>() { }.getType())
+                .register(400, new TypeToken<Void>() { }.getType())
+                .register(401, new TypeToken<Void>() { }.getType())
+                .register(500, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 

@@ -6,7 +6,9 @@ package com.fincloud.cloudinsight.implementation;
 
 import retrofit2.Retrofit;
 import com.fincloud.cloudinsight.PortPlugins;
+import com.fincloud.cloudinsight.models.PortPluginDetailResponse;
 import com.fincloud.cloudinsight.models.PortPluginParameter;
+import com.fincloud.cloudinsight.models.PortPluginRequest;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
@@ -53,7 +55,7 @@ public class PortPluginsImpl implements PortPlugins {
     interface PortPluginsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.PortPlugins create" })
         @POST("cw_server/real/api/plugin/port")
-        Observable<Response<ResponseBody>> create(@Body PortPluginParameter parameters);
+        Observable<Response<ResponseBody>> create(@Body PortPluginRequest parameters);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.PortPlugins list" })
         @GET("cw_server/real/api/plugin/port")
@@ -73,7 +75,7 @@ public class PortPluginsImpl implements PortPlugins {
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void create(PortPluginParameter parameters) {
+    public void create(PortPluginRequest parameters) {
         createWithServiceResponseAsync(parameters).toBlocking().single().body();
     }
 
@@ -85,7 +87,7 @@ public class PortPluginsImpl implements PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> createAsync(PortPluginParameter parameters, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> createAsync(PortPluginRequest parameters, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(createWithServiceResponseAsync(parameters), serviceCallback);
     }
 
@@ -96,7 +98,7 @@ public class PortPluginsImpl implements PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> createAsync(PortPluginParameter parameters) {
+    public Observable<Void> createAsync(PortPluginRequest parameters) {
         return createWithServiceResponseAsync(parameters).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
@@ -112,7 +114,7 @@ public class PortPluginsImpl implements PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> createWithServiceResponseAsync(PortPluginParameter parameters) {
+    public Observable<ServiceResponse<Void>> createWithServiceResponseAsync(PortPluginRequest parameters) {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
@@ -134,6 +136,8 @@ public class PortPluginsImpl implements PortPlugins {
     private ServiceResponse<Void> createDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .register(401, new TypeToken<Void>() { }.getType())
+                .register(500, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -199,6 +203,8 @@ public class PortPluginsImpl implements PortPlugins {
     private ServiceResponse<List<PortPluginParameter>> listDelegate(Response<ResponseBody> response) throws RestException, IOException {
         return this.client.restClient().responseBuilderFactory().<List<PortPluginParameter>, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<PortPluginParameter>>() { }.getType())
+                .register(401, new TypeToken<Void>() { }.getType())
+                .register(500, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -209,9 +215,9 @@ public class PortPluginsImpl implements PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the PortPluginParameter object if successful.
+     * @return the PortPluginDetailResponse object if successful.
      */
-    public PortPluginParameter get(String instanceNo) {
+    public PortPluginDetailResponse get(String instanceNo) {
         return getWithServiceResponseAsync(instanceNo).toBlocking().single().body();
     }
 
@@ -223,7 +229,7 @@ public class PortPluginsImpl implements PortPlugins {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<PortPluginParameter> getAsync(String instanceNo, final ServiceCallback<PortPluginParameter> serviceCallback) {
+    public ServiceFuture<PortPluginDetailResponse> getAsync(String instanceNo, final ServiceCallback<PortPluginDetailResponse> serviceCallback) {
         return ServiceFuture.fromResponse(getWithServiceResponseAsync(instanceNo), serviceCallback);
     }
 
@@ -232,12 +238,12 @@ public class PortPluginsImpl implements PortPlugins {
      *
      * @param instanceNo 인스턴스 번호
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PortPluginParameter object
+     * @return the observable to the PortPluginDetailResponse object
      */
-    public Observable<PortPluginParameter> getAsync(String instanceNo) {
-        return getWithServiceResponseAsync(instanceNo).map(new Func1<ServiceResponse<PortPluginParameter>, PortPluginParameter>() {
+    public Observable<PortPluginDetailResponse> getAsync(String instanceNo) {
+        return getWithServiceResponseAsync(instanceNo).map(new Func1<ServiceResponse<PortPluginDetailResponse>, PortPluginDetailResponse>() {
             @Override
-            public PortPluginParameter call(ServiceResponse<PortPluginParameter> response) {
+            public PortPluginDetailResponse call(ServiceResponse<PortPluginDetailResponse> response) {
                 return response.body();
             }
         });
@@ -248,18 +254,18 @@ public class PortPluginsImpl implements PortPlugins {
      *
      * @param instanceNo 인스턴스 번호
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PortPluginParameter object
+     * @return the observable to the PortPluginDetailResponse object
      */
-    public Observable<ServiceResponse<PortPluginParameter>> getWithServiceResponseAsync(String instanceNo) {
+    public Observable<ServiceResponse<PortPluginDetailResponse>> getWithServiceResponseAsync(String instanceNo) {
         if (instanceNo == null) {
             throw new IllegalArgumentException("Parameter instanceNo is required and cannot be null.");
         }
         return service.get(instanceNo)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PortPluginParameter>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<PortPluginDetailResponse>>>() {
                 @Override
-                public Observable<ServiceResponse<PortPluginParameter>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<PortPluginDetailResponse>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<PortPluginParameter> clientResponse = getDelegate(response);
+                        ServiceResponse<PortPluginDetailResponse> clientResponse = getDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -268,9 +274,11 @@ public class PortPluginsImpl implements PortPlugins {
             });
     }
 
-    private ServiceResponse<PortPluginParameter> getDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<PortPluginParameter, RestException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<PortPluginParameter>() { }.getType())
+    private ServiceResponse<PortPluginDetailResponse> getDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<PortPluginDetailResponse, RestException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<PortPluginDetailResponse>() { }.getType())
+                .register(401, new TypeToken<Void>() { }.getType())
+                .register(500, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 

@@ -6,12 +6,15 @@ package com.fincloud.cloudinsight.implementation;
 
 import retrofit2.Retrofit;
 import com.fincloud.cloudinsight.Servers;
+import com.fincloud.cloudinsight.models.ServerTopMetricParameter;
+import com.fincloud.cloudinsight.models.SeverTargetMetric;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
+import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -46,63 +49,70 @@ public class ServersImpl implements Servers {
      * used by Retrofit to perform actually REST calls.
      */
     interface ServersService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.Servers creatTop" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.Servers getTop" })
         @POST("cw_fea/real/cw/api/servers/top")
-        Observable<Response<ResponseBody>> creatTop(@Query("query") String query);
+        Observable<Response<ResponseBody>> getTop(@Query("query") SeverTargetMetric query);
 
     }
 
     /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
+     * 사용자의 Server 중 CPU, Memory, File system 별 사용량 top5에 해당하는 server를 조회합니다.
      *
+     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert). Possible values include: 'avg_cpu_used_rto', 'mem_usert', 'avg_fs_usert'
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the List&lt;ServerTopMetricParameter&gt; object if successful.
      */
-    public void creatTop() {
-        creatTopWithServiceResponseAsync().toBlocking().single().body();
+    public List<ServerTopMetricParameter> getTop(SeverTargetMetric query) {
+        return getTopWithServiceResponseAsync(query).toBlocking().single().body();
     }
 
     /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
+     * 사용자의 Server 중 CPU, Memory, File system 별 사용량 top5에 해당하는 server를 조회합니다.
      *
+     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert). Possible values include: 'avg_cpu_used_rto', 'mem_usert', 'avg_fs_usert'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> creatTopAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(creatTopWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<List<ServerTopMetricParameter>> getTopAsync(SeverTargetMetric query, final ServiceCallback<List<ServerTopMetricParameter>> serviceCallback) {
+        return ServiceFuture.fromResponse(getTopWithServiceResponseAsync(query), serviceCallback);
     }
 
     /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
+     * 사용자의 Server 중 CPU, Memory, File system 별 사용량 top5에 해당하는 server를 조회합니다.
      *
+     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert). Possible values include: 'avg_cpu_used_rto', 'mem_usert', 'avg_fs_usert'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the List&lt;ServerTopMetricParameter&gt; object
      */
-    public Observable<Void> creatTopAsync() {
-        return creatTopWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<List<ServerTopMetricParameter>> getTopAsync(SeverTargetMetric query) {
+        return getTopWithServiceResponseAsync(query).map(new Func1<ServiceResponse<List<ServerTopMetricParameter>>, List<ServerTopMetricParameter>>() {
             @Override
-            public Void call(ServiceResponse<Void> response) {
+            public List<ServerTopMetricParameter> call(ServiceResponse<List<ServerTopMetricParameter>> response) {
                 return response.body();
             }
         });
     }
 
     /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
+     * 사용자의 Server 중 CPU, Memory, File system 별 사용량 top5에 해당하는 server를 조회합니다.
      *
+     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert). Possible values include: 'avg_cpu_used_rto', 'mem_usert', 'avg_fs_usert'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the List&lt;ServerTopMetricParameter&gt; object
      */
-    public Observable<ServiceResponse<Void>> creatTopWithServiceResponseAsync() {
-        final String query = null;
-        return service.creatTop(query)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+    public Observable<ServiceResponse<List<ServerTopMetricParameter>>> getTopWithServiceResponseAsync(SeverTargetMetric query) {
+        if (query == null) {
+            throw new IllegalArgumentException("Parameter query is required and cannot be null.");
+        }
+        return service.getTop(query)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<ServerTopMetricParameter>>>>() {
                 @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<List<ServerTopMetricParameter>>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<Void> clientResponse = creatTopDelegate(response);
+                        ServiceResponse<List<ServerTopMetricParameter>> clientResponse = getTopDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -111,71 +121,11 @@ public class ServersImpl implements Servers {
             });
     }
 
-    /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
-     *
-     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    public void creatTop(String query) {
-        creatTopWithServiceResponseAsync(query).toBlocking().single().body();
-    }
-
-    /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
-     *
-     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert)
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<Void> creatTopAsync(String query, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(creatTopWithServiceResponseAsync(query), serviceCallback);
-    }
-
-    /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
-     *
-     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> creatTopAsync(String query) {
-        return creatTopWithServiceResponseAsync(query).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
-     *
-     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> creatTopWithServiceResponseAsync(String query) {
-        return service.creatTop(query)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = creatTopDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> creatTopDelegate(Response<ResponseBody> response) throws RestException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
+    private ServiceResponse<List<ServerTopMetricParameter>> getTopDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<List<ServerTopMetricParameter>, RestException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<List<ServerTopMetricParameter>>() { }.getType())
+                .register(401, new TypeToken<Void>() { }.getType())
+                .register(500, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 

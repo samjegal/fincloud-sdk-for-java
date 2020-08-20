@@ -5,14 +5,22 @@
 package com.fincloud.cloudinsight.implementation;
 
 import com.fincloud.cloudinsight.CloudInsightManagementClient;
+import com.fincloud.cloudinsight.Charts;
 import com.fincloud.cloudinsight.Datas;
 import com.fincloud.cloudinsight.Events;
-import com.fincloud.cloudinsight.Rules;
+import com.fincloud.cloudinsight.Notifications;
+import com.fincloud.cloudinsight.Metrics;
+import com.fincloud.cloudinsight.RuleGroups;
+import com.fincloud.cloudinsight.MonitorGroups;
+import com.fincloud.cloudinsight.MetricGroups;
+import com.fincloud.cloudinsight.Monitors;
 import com.fincloud.cloudinsight.Schemas;
+import com.fincloud.cloudinsight.Extendeds;
 import com.fincloud.cloudinsight.Servers;
 import com.fincloud.cloudinsight.Collectors;
-import com.fincloud.cloudinsight.PluginProcess;
+import com.fincloud.cloudinsight.ProcessPlugins;
 import com.fincloud.cloudinsight.PortPlugins;
+import com.fincloud.cloudinsight.FilePlugins;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
@@ -22,6 +30,19 @@ import retrofit2.Retrofit;
  * Initializes a new instance of the CloudInsightManagementClient class.
  */
 public class CloudInsightManagementClientImpl extends ServiceClient implements CloudInsightManagementClient {
+
+    /**
+     * The Charts object to access its operations.
+     */
+    private Charts charts;
+
+    /**
+     * Gets the Charts object to access its operations.
+     * @return the Charts object.
+     */
+    public Charts charts() {
+        return this.charts;
+    }
 
     /**
      * The Datas object to access its operations.
@@ -50,16 +71,81 @@ public class CloudInsightManagementClientImpl extends ServiceClient implements C
     }
 
     /**
-     * The Rules object to access its operations.
+     * The Notifications object to access its operations.
      */
-    private Rules rules;
+    private Notifications notifications;
 
     /**
-     * Gets the Rules object to access its operations.
-     * @return the Rules object.
+     * Gets the Notifications object to access its operations.
+     * @return the Notifications object.
      */
-    public Rules rules() {
-        return this.rules;
+    public Notifications notifications() {
+        return this.notifications;
+    }
+
+    /**
+     * The Metrics object to access its operations.
+     */
+    private Metrics metrics;
+
+    /**
+     * Gets the Metrics object to access its operations.
+     * @return the Metrics object.
+     */
+    public Metrics metrics() {
+        return this.metrics;
+    }
+
+    /**
+     * The RuleGroups object to access its operations.
+     */
+    private RuleGroups ruleGroups;
+
+    /**
+     * Gets the RuleGroups object to access its operations.
+     * @return the RuleGroups object.
+     */
+    public RuleGroups ruleGroups() {
+        return this.ruleGroups;
+    }
+
+    /**
+     * The MonitorGroups object to access its operations.
+     */
+    private MonitorGroups monitorGroups;
+
+    /**
+     * Gets the MonitorGroups object to access its operations.
+     * @return the MonitorGroups object.
+     */
+    public MonitorGroups monitorGroups() {
+        return this.monitorGroups;
+    }
+
+    /**
+     * The MetricGroups object to access its operations.
+     */
+    private MetricGroups metricGroups;
+
+    /**
+     * Gets the MetricGroups object to access its operations.
+     * @return the MetricGroups object.
+     */
+    public MetricGroups metricGroups() {
+        return this.metricGroups;
+    }
+
+    /**
+     * The Monitors object to access its operations.
+     */
+    private Monitors monitors;
+
+    /**
+     * Gets the Monitors object to access its operations.
+     * @return the Monitors object.
+     */
+    public Monitors monitors() {
+        return this.monitors;
     }
 
     /**
@@ -73,6 +159,19 @@ public class CloudInsightManagementClientImpl extends ServiceClient implements C
      */
     public Schemas schemas() {
         return this.schemas;
+    }
+
+    /**
+     * The Extendeds object to access its operations.
+     */
+    private Extendeds extendeds;
+
+    /**
+     * Gets the Extendeds object to access its operations.
+     * @return the Extendeds object.
+     */
+    public Extendeds extendeds() {
+        return this.extendeds;
     }
 
     /**
@@ -102,16 +201,16 @@ public class CloudInsightManagementClientImpl extends ServiceClient implements C
     }
 
     /**
-     * The PluginProcess object to access its operations.
+     * The ProcessPlugins object to access its operations.
      */
-    private PluginProcess pluginProcess;
+    private ProcessPlugins processPlugins;
 
     /**
-     * Gets the PluginProcess object to access its operations.
-     * @return the PluginProcess object.
+     * Gets the ProcessPlugins object to access its operations.
+     * @return the ProcessPlugins object.
      */
-    public PluginProcess pluginProcess() {
-        return this.pluginProcess;
+    public ProcessPlugins processPlugins() {
+        return this.processPlugins;
     }
 
     /**
@@ -125,6 +224,19 @@ public class CloudInsightManagementClientImpl extends ServiceClient implements C
      */
     public PortPlugins portPlugins() {
         return this.portPlugins;
+    }
+
+    /**
+     * The FilePlugins object to access its operations.
+     */
+    private FilePlugins filePlugins;
+
+    /**
+     * Gets the FilePlugins object to access its operations.
+     * @return the FilePlugins object.
+     */
+    public FilePlugins filePlugins() {
+        return this.filePlugins;
     }
 
     /**
@@ -178,13 +290,21 @@ public class CloudInsightManagementClientImpl extends ServiceClient implements C
     }
 
     private void initialize() {
+        this.charts = new ChartsImpl(retrofit(), this);
         this.datas = new DatasImpl(retrofit(), this);
         this.events = new EventsImpl(retrofit(), this);
-        this.rules = new RulesImpl(retrofit(), this);
+        this.notifications = new NotificationsImpl(retrofit(), this);
+        this.metrics = new MetricsImpl(retrofit(), this);
+        this.ruleGroups = new RuleGroupsImpl(retrofit(), this);
+        this.monitorGroups = new MonitorGroupsImpl(retrofit(), this);
+        this.metricGroups = new MetricGroupsImpl(retrofit(), this);
+        this.monitors = new MonitorsImpl(retrofit(), this);
         this.schemas = new SchemasImpl(retrofit(), this);
+        this.extendeds = new ExtendedsImpl(retrofit(), this);
         this.servers = new ServersImpl(retrofit(), this);
         this.collectors = new CollectorsImpl(retrofit(), this);
-        this.pluginProcess = new PluginProcessImpl(retrofit(), this);
+        this.processPlugins = new ProcessPluginsImpl(retrofit(), this);
         this.portPlugins = new PortPluginsImpl(retrofit(), this);
+        this.filePlugins = new FilePluginsImpl(retrofit(), this);
     }
 }

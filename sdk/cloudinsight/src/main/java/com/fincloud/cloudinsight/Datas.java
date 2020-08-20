@@ -4,9 +4,9 @@
 
 package com.fincloud.cloudinsight;
 
-import com.fincloud.cloudinsight.models.CloudInsightDataInfoParameter;
-import com.fincloud.cloudinsight.models.CloudInsightQueryMultipleParameter;
-import com.fincloud.cloudinsight.models.CloudInsightQueryParameter;
+import com.fincloud.cloudinsight.models.MultipleDataParameter;
+import com.fincloud.cloudinsight.models.QueryMultipleRequest;
+import com.fincloud.cloudinsight.models.QueryRequest;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
@@ -21,41 +21,7 @@ import rx.Observable;
  */
 public interface Datas {
     /**
-     * Metric information for the data to be retrieved.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void preview();
-
-    /**
-     * Metric information for the data to be retrieved.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> previewAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Metric information for the data to be retrieved.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> previewAsync();
-
-    /**
-     * Metric information for the data to be retrieved.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> previewWithServiceResponseAsync();
-
-    /**
-     * Get widget data preview for dashboard widget.
+     * Cloud Insight에서 수집한 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -63,73 +29,73 @@ public interface Datas {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;List&lt;Double&gt;&gt; object if successful.
      */
-    List<List<Double>> query(CloudInsightQueryParameter parameters);
+    List<List<Double>> query(QueryRequest parameters);
 
     /**
-     * Get widget data preview for dashboard widget.
+     * Cloud Insight에서 수집한 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<List<List<Double>>> queryAsync(CloudInsightQueryParameter parameters, final ServiceCallback<List<List<Double>>> serviceCallback);
+    ServiceFuture<List<List<Double>>> queryAsync(QueryRequest parameters, final ServiceCallback<List<List<Double>>> serviceCallback);
 
     /**
-     * Get widget data preview for dashboard widget.
+     * Cloud Insight에서 수집한 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;Double&gt;&gt; object
      */
-    Observable<List<List<Double>>> queryAsync(CloudInsightQueryParameter parameters);
+    Observable<List<List<Double>>> queryAsync(QueryRequest parameters);
 
     /**
-     * Get widget data preview for dashboard widget.
+     * Cloud Insight에서 수집한 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;Double&gt;&gt; object
      */
-    Observable<ServiceResponse<List<List<Double>>>> queryWithServiceResponseAsync(CloudInsightQueryParameter parameters);
+    Observable<ServiceResponse<List<List<Double>>>> queryWithServiceResponseAsync(QueryRequest parameters);
 
     /**
-     * Query multiple metric data for a specific product with specified criteria.
+     * Cloud Insight에서 수집한 여러개의 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the List&lt;CloudInsightDataInfoParameter&gt; object if successful.
+     * @return the List&lt;MultipleDataParameter&gt; object if successful.
      */
-    List<CloudInsightDataInfoParameter> queryMultiple(CloudInsightQueryMultipleParameter parameters);
+    List<MultipleDataParameter> queryMultiple(QueryMultipleRequest parameters);
 
     /**
-     * Query multiple metric data for a specific product with specified criteria.
+     * Cloud Insight에서 수집한 여러개의 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<List<CloudInsightDataInfoParameter>> queryMultipleAsync(CloudInsightQueryMultipleParameter parameters, final ServiceCallback<List<CloudInsightDataInfoParameter>> serviceCallback);
+    ServiceFuture<List<MultipleDataParameter>> queryMultipleAsync(QueryMultipleRequest parameters, final ServiceCallback<List<MultipleDataParameter>> serviceCallback);
 
     /**
-     * Query multiple metric data for a specific product with specified criteria.
+     * Cloud Insight에서 수집한 여러개의 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;CloudInsightDataInfoParameter&gt; object
+     * @return the observable to the List&lt;MultipleDataParameter&gt; object
      */
-    Observable<List<CloudInsightDataInfoParameter>> queryMultipleAsync(CloudInsightQueryMultipleParameter parameters);
+    Observable<List<MultipleDataParameter>> queryMultipleAsync(QueryMultipleRequest parameters);
 
     /**
-     * Query multiple metric data for a specific product with specified criteria.
+     * Cloud Insight에서 수집한 여러개의 time-series 데이터를 쿼리합니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;CloudInsightDataInfoParameter&gt; object
+     * @return the observable to the List&lt;MultipleDataParameter&gt; object
      */
-    Observable<ServiceResponse<List<CloudInsightDataInfoParameter>>> queryMultipleWithServiceResponseAsync(CloudInsightQueryMultipleParameter parameters);
+    Observable<ServiceResponse<List<MultipleDataParameter>>> queryMultipleWithServiceResponseAsync(QueryMultipleRequest parameters);
 
 }

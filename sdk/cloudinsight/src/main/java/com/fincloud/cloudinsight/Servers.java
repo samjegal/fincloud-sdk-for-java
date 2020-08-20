@@ -4,11 +4,14 @@
 
 package com.fincloud.cloudinsight;
 
+import com.fincloud.cloudinsight.models.ServerTopMetricParameter;
+import com.fincloud.cloudinsight.models.SeverTargetMetric;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
+import java.util.List;
 import rx.Observable;
 
 /**
@@ -17,74 +20,42 @@ import rx.Observable;
  */
 public interface Servers {
     /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
+     * 사용자의 Server 중 CPU, Memory, File system 별 사용량 top5에 해당하는 server를 조회합니다.
      *
+     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert). Possible values include: 'avg_cpu_used_rto', 'mem_usert', 'avg_fs_usert'
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the List&lt;ServerTopMetricParameter&gt; object if successful.
      */
-    void creatTop();
+    List<ServerTopMetricParameter> getTop(SeverTargetMetric query);
 
     /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
+     * 사용자의 Server 중 CPU, Memory, File system 별 사용량 top5에 해당하는 server를 조회합니다.
      *
+     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert). Possible values include: 'avg_cpu_used_rto', 'mem_usert', 'avg_fs_usert'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> creatTopAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<List<ServerTopMetricParameter>> getTopAsync(SeverTargetMetric query, final ServiceCallback<List<ServerTopMetricParameter>> serviceCallback);
 
     /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
+     * 사용자의 Server 중 CPU, Memory, File system 별 사용량 top5에 해당하는 server를 조회합니다.
      *
+     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert). Possible values include: 'avg_cpu_used_rto', 'mem_usert', 'avg_fs_usert'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the List&lt;ServerTopMetricParameter&gt; object
      */
-    Observable<Void> creatTopAsync();
+    Observable<List<ServerTopMetricParameter>> getTopAsync(SeverTargetMetric query);
 
     /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
+     * 사용자의 Server 중 CPU, Memory, File system 별 사용량 top5에 해당하는 server를 조회합니다.
      *
+     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert). Possible values include: 'avg_cpu_used_rto', 'mem_usert', 'avg_fs_usert'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the List&lt;ServerTopMetricParameter&gt; object
      */
-    Observable<ServiceResponse<Void>> creatTopWithServiceResponseAsync();
-    /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
-     *
-     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void creatTop(String query);
-
-    /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
-     *
-     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert)
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> creatTopAsync(String query, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
-     *
-     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> creatTopAsync(String query);
-
-    /**
-     * Target metric (mem_usert/avg_cpu_user_rto/fs_usert).
-     *
-     * @param query Target metric (mem_usert/avg_cpu_user_rto/fs_usert)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> creatTopWithServiceResponseAsync(String query);
+    Observable<ServiceResponse<List<ServerTopMetricParameter>>> getTopWithServiceResponseAsync(SeverTargetMetric query);
 
 }

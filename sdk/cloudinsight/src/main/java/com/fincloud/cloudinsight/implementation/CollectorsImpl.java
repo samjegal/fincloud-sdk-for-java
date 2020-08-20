@@ -6,7 +6,8 @@ package com.fincloud.cloudinsight.implementation;
 
 import retrofit2.Retrofit;
 import com.fincloud.cloudinsight.Collectors;
-import com.fincloud.cloudinsight.models.CloudInsightCollectorParameter;
+import com.fincloud.cloudinsight.models.CollectorRequest;
+import com.fincloud.cloudinsight.models.CollectorResponse;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
@@ -48,70 +49,71 @@ public class CollectorsImpl implements Collectors {
      * used by Retrofit to perform actually REST calls.
      */
     interface CollectorsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.Collectors push" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: com.fincloud.cloudinsight.Collectors send" })
         @POST("cw_collector/real")
-        Observable<Response<ResponseBody>> push(@Body CloudInsightCollectorParameter parameters);
+        Observable<Response<ResponseBody>> send(@Body CollectorRequest parameters);
 
     }
 
     /**
-     * Collector API.
+     * JSON 데이터를 Cloud Insight Collector로 보냅니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the CollectorResponse object if successful.
      */
-    public void push(CloudInsightCollectorParameter parameters) {
-        pushWithServiceResponseAsync(parameters).toBlocking().single().body();
+    public CollectorResponse send(CollectorRequest parameters) {
+        return sendWithServiceResponseAsync(parameters).toBlocking().single().body();
     }
 
     /**
-     * Collector API.
+     * JSON 데이터를 Cloud Insight Collector로 보냅니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> pushAsync(CloudInsightCollectorParameter parameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(pushWithServiceResponseAsync(parameters), serviceCallback);
+    public ServiceFuture<CollectorResponse> sendAsync(CollectorRequest parameters, final ServiceCallback<CollectorResponse> serviceCallback) {
+        return ServiceFuture.fromResponse(sendWithServiceResponseAsync(parameters), serviceCallback);
     }
 
     /**
-     * Collector API.
+     * JSON 데이터를 Cloud Insight Collector로 보냅니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the CollectorResponse object
      */
-    public Observable<Void> pushAsync(CloudInsightCollectorParameter parameters) {
-        return pushWithServiceResponseAsync(parameters).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<CollectorResponse> sendAsync(CollectorRequest parameters) {
+        return sendWithServiceResponseAsync(parameters).map(new Func1<ServiceResponse<CollectorResponse>, CollectorResponse>() {
             @Override
-            public Void call(ServiceResponse<Void> response) {
+            public CollectorResponse call(ServiceResponse<CollectorResponse> response) {
                 return response.body();
             }
         });
     }
 
     /**
-     * Collector API.
+     * JSON 데이터를 Cloud Insight Collector로 보냅니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the CollectorResponse object
      */
-    public Observable<ServiceResponse<Void>> pushWithServiceResponseAsync(CloudInsightCollectorParameter parameters) {
+    public Observable<ServiceResponse<CollectorResponse>> sendWithServiceResponseAsync(CollectorRequest parameters) {
         if (parameters == null) {
             throw new IllegalArgumentException("Parameter parameters is required and cannot be null.");
         }
         Validator.validate(parameters);
-        return service.push(parameters)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+        return service.send(parameters)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<CollectorResponse>>>() {
                 @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<CollectorResponse>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<Void> clientResponse = pushDelegate(response);
+                        ServiceResponse<CollectorResponse> clientResponse = sendDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -120,9 +122,9 @@ public class CollectorsImpl implements Collectors {
             });
     }
 
-    private ServiceResponse<Void> pushDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
+    private ServiceResponse<CollectorResponse> sendDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<CollectorResponse, RestException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<CollectorResponse>() { }.getType())
                 .build(response);
     }
 

@@ -4,7 +4,8 @@
 
 package com.fincloud.cloudinsight;
 
-import com.fincloud.cloudinsight.models.CloudInsightCollectorParameter;
+import com.fincloud.cloudinsight.models.CollectorRequest;
+import com.fincloud.cloudinsight.models.CollectorResponse;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
@@ -18,41 +19,42 @@ import rx.Observable;
  */
 public interface Collectors {
     /**
-     * Collector API.
+     * JSON 데이터를 Cloud Insight Collector로 보냅니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the CollectorResponse object if successful.
      */
-    void push(CloudInsightCollectorParameter parameters);
+    CollectorResponse send(CollectorRequest parameters);
 
     /**
-     * Collector API.
+     * JSON 데이터를 Cloud Insight Collector로 보냅니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> pushAsync(CloudInsightCollectorParameter parameters, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<CollectorResponse> sendAsync(CollectorRequest parameters, final ServiceCallback<CollectorResponse> serviceCallback);
 
     /**
-     * Collector API.
+     * JSON 데이터를 Cloud Insight Collector로 보냅니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the CollectorResponse object
      */
-    Observable<Void> pushAsync(CloudInsightCollectorParameter parameters);
+    Observable<CollectorResponse> sendAsync(CollectorRequest parameters);
 
     /**
-     * Collector API.
+     * JSON 데이터를 Cloud Insight Collector로 보냅니다.
      *
      * @param parameters Cloud Insight Custom 메트릭 데이터
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the CollectorResponse object
      */
-    Observable<ServiceResponse<Void>> pushWithServiceResponseAsync(CloudInsightCollectorParameter parameters);
+    Observable<ServiceResponse<CollectorResponse>> sendWithServiceResponseAsync(CollectorRequest parameters);
 
 }

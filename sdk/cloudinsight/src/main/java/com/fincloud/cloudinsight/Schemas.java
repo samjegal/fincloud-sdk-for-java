@@ -4,7 +4,10 @@
 
 package com.fincloud.cloudinsight;
 
-import com.fincloud.cloudinsight.models.CloudInsightSchemaParameter;
+import com.fincloud.cloudinsight.models.ScehmaUpdateResponse;
+import com.fincloud.cloudinsight.models.SchemaRegisterResponse;
+import com.fincloud.cloudinsight.models.SchemaRequest;
+import com.fincloud.cloudinsight.models.SchemaResponse;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
@@ -18,554 +21,204 @@ import rx.Observable;
  */
 public interface Schemas {
     /**
-     * Get schema information of the specific product.
+     * 사용자가 정의한 스키마를 조회합니다.
      *
+     * @param prodName 상품의 이름
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the SchemaResponse object if successful.
      */
-    void get();
+    SchemaResponse get(String prodName);
 
     /**
-     * Get schema information of the specific product.
+     * 사용자가 정의한 스키마를 조회합니다.
      *
+     * @param prodName 상품의 이름
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> getAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<SchemaResponse> getAsync(String prodName, final ServiceCallback<SchemaResponse> serviceCallback);
 
     /**
-     * Get schema information of the specific product.
+     * 사용자가 정의한 스키마를 조회합니다.
      *
+     * @param prodName 상품의 이름
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the SchemaResponse object
      */
-    Observable<Void> getAsync();
+    Observable<SchemaResponse> getAsync(String prodName);
 
     /**
-     * Get schema information of the specific product.
+     * 사용자가 정의한 스키마를 조회합니다.
      *
+     * @param prodName 상품의 이름
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the SchemaResponse object
      */
-    Observable<ServiceResponse<Void>> getWithServiceResponseAsync();
+    Observable<ServiceResponse<SchemaResponse>> getWithServiceResponseAsync(String prodName);
     /**
-     * Get schema information of the specific product.
+     * 사용자가 정의한 스키마를 조회합니다.
      *
-     * @param prodName Product 이름
+     * @param prodName 상품의 이름
+     * @param cwKey 상품의 cw_key
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the SchemaResponse object if successful.
      */
-    void get(String prodName);
+    SchemaResponse get(String prodName, String cwKey);
 
     /**
-     * Get schema information of the specific product.
+     * 사용자가 정의한 스키마를 조회합니다.
      *
-     * @param prodName Product 이름
+     * @param prodName 상품의 이름
+     * @param cwKey 상품의 cw_key
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> getAsync(String prodName, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<SchemaResponse> getAsync(String prodName, String cwKey, final ServiceCallback<SchemaResponse> serviceCallback);
 
     /**
-     * Get schema information of the specific product.
+     * 사용자가 정의한 스키마를 조회합니다.
      *
-     * @param prodName Product 이름
+     * @param prodName 상품의 이름
+     * @param cwKey 상품의 cw_key
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the SchemaResponse object
      */
-    Observable<Void> getAsync(String prodName);
+    Observable<SchemaResponse> getAsync(String prodName, String cwKey);
 
     /**
-     * Get schema information of the specific product.
+     * 사용자가 정의한 스키마를 조회합니다.
      *
-     * @param prodName Product 이름
+     * @param prodName 상품의 이름
+     * @param cwKey 상품의 cw_key
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the SchemaResponse object
      */
-    Observable<ServiceResponse<Void>> getWithServiceResponseAsync(String prodName);
+    Observable<ServiceResponse<SchemaResponse>> getWithServiceResponseAsync(String prodName, String cwKey);
 
     /**
-     * Create schema for user application. If product does not exist, it will registered automatically.
+     * Cloud Insight에서 사용자 정의 스키마를 등록합니다.
      *
-     * @param parameters Cloud Insight Custom 메트릭 생성 데이터
+     * @param parameters 상품의 스키마 정의
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the SchemaRegisterResponse object if successful.
      */
-    void create(CloudInsightSchemaParameter parameters);
+    SchemaRegisterResponse register(SchemaRequest parameters);
 
     /**
-     * Create schema for user application. If product does not exist, it will registered automatically.
+     * Cloud Insight에서 사용자 정의 스키마를 등록합니다.
      *
-     * @param parameters Cloud Insight Custom 메트릭 생성 데이터
+     * @param parameters 상품의 스키마 정의
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> createAsync(CloudInsightSchemaParameter parameters, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<SchemaRegisterResponse> registerAsync(SchemaRequest parameters, final ServiceCallback<SchemaRegisterResponse> serviceCallback);
 
     /**
-     * Create schema for user application. If product does not exist, it will registered automatically.
+     * Cloud Insight에서 사용자 정의 스키마를 등록합니다.
      *
-     * @param parameters Cloud Insight Custom 메트릭 생성 데이터
+     * @param parameters 상품의 스키마 정의
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the SchemaRegisterResponse object
      */
-    Observable<Void> createAsync(CloudInsightSchemaParameter parameters);
+    Observable<SchemaRegisterResponse> registerAsync(SchemaRequest parameters);
 
     /**
-     * Create schema for user application. If product does not exist, it will registered automatically.
+     * Cloud Insight에서 사용자 정의 스키마를 등록합니다.
      *
-     * @param parameters Cloud Insight Custom 메트릭 생성 데이터
+     * @param parameters 상품의 스키마 정의
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the SchemaRegisterResponse object
      */
-    Observable<ServiceResponse<Void>> createWithServiceResponseAsync(CloudInsightSchemaParameter parameters);
-    /**
-     * Create schema for user application. If product does not exist, it will registered automatically.
-     *
-     * @param parameters Cloud Insight Custom 메트릭 생성 데이터
-     * @param prodName Product 이름
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void create(CloudInsightSchemaParameter parameters, String prodName);
-
-    /**
-     * Create schema for user application. If product does not exist, it will registered automatically.
-     *
-     * @param parameters Cloud Insight Custom 메트릭 생성 데이터
-     * @param prodName Product 이름
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> createAsync(CloudInsightSchemaParameter parameters, String prodName, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Create schema for user application. If product does not exist, it will registered automatically.
-     *
-     * @param parameters Cloud Insight Custom 메트릭 생성 데이터
-     * @param prodName Product 이름
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> createAsync(CloudInsightSchemaParameter parameters, String prodName);
-
-    /**
-     * Create schema for user application. If product does not exist, it will registered automatically.
-     *
-     * @param parameters Cloud Insight Custom 메트릭 생성 데이터
-     * @param prodName Product 이름
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> createWithServiceResponseAsync(CloudInsightSchemaParameter parameters, String prodName);
+    Observable<ServiceResponse<SchemaRegisterResponse>> registerWithServiceResponseAsync(SchemaRequest parameters);
 
     /**
      * Update schema for an existing product.
      *
+     * @param parameters 상품의 스키마 정의
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the ScehmaUpdateResponse object if successful.
      */
-    void update();
+    ScehmaUpdateResponse update(SchemaRequest parameters);
 
     /**
      * Update schema for an existing product.
      *
+     * @param parameters 상품의 스키마 정의
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> updateAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<ScehmaUpdateResponse> updateAsync(SchemaRequest parameters, final ServiceCallback<ScehmaUpdateResponse> serviceCallback);
 
     /**
      * Update schema for an existing product.
      *
+     * @param parameters 상품의 스키마 정의
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the ScehmaUpdateResponse object
      */
-    Observable<Void> updateAsync();
+    Observable<ScehmaUpdateResponse> updateAsync(SchemaRequest parameters);
 
     /**
      * Update schema for an existing product.
      *
+     * @param parameters 상품의 스키마 정의
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the observable to the ScehmaUpdateResponse object
      */
-    Observable<ServiceResponse<Void>> updateWithServiceResponseAsync();
+    Observable<ServiceResponse<ScehmaUpdateResponse>> updateWithServiceResponseAsync(SchemaRequest parameters);
+
     /**
-     * Update schema for an existing product.
+     * Delete schema for an application.
      *
+     * @param cwKey 상품의 cw_key
      * @param prodName Product 이름
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    void update(String prodName);
+    void delete(String cwKey, String prodName);
 
     /**
-     * Update schema for an existing product.
+     * Delete schema for an application.
      *
+     * @param cwKey 상품의 cw_key
      * @param prodName Product 이름
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> updateAsync(String prodName, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> deleteAsync(String cwKey, String prodName, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Update schema for an existing product.
+     * Delete schema for an application.
      *
+     * @param cwKey 상품의 cw_key
      * @param prodName Product 이름
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> updateAsync(String prodName);
+    Observable<Void> deleteAsync(String cwKey, String prodName);
 
     /**
-     * Update schema for an existing product.
+     * Delete schema for an application.
      *
+     * @param cwKey 상품의 cw_key
      * @param prodName Product 이름
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> updateWithServiceResponseAsync(String prodName);
-
-    /**
-     * Delete schema for an application.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void delete();
-
-    /**
-     * Delete schema for an application.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> deleteAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Delete schema for an application.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> deleteAsync();
-
-    /**
-     * Delete schema for an application.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync();
-    /**
-     * Delete schema for an application.
-     *
-     * @param prodName Product 이름
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void delete(String prodName);
-
-    /**
-     * Delete schema for an application.
-     *
-     * @param prodName Product 이름
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> deleteAsync(String prodName, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Delete schema for an application.
-     *
-     * @param prodName Product 이름
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> deleteAsync(String prodName);
-
-    /**
-     * Delete schema for an application.
-     *
-     * @param prodName Product 이름
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync(String prodName);
-
-    /**
-     * Disable the extended metrics for a product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void disable();
-
-    /**
-     * Disable the extended metrics for a product.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> disableAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Disable the extended metrics for a product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> disableAsync();
-
-    /**
-     * Disable the extended metrics for a product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> disableWithServiceResponseAsync();
-    /**
-     * Disable the extended metrics for a product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void disable(String cwKey, String instanceIds);
-
-    /**
-     * Disable the extended metrics for a product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> disableAsync(String cwKey, String instanceIds, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Disable the extended metrics for a product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> disableAsync(String cwKey, String instanceIds);
-
-    /**
-     * Disable the extended metrics for a product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> disableWithServiceResponseAsync(String cwKey, String instanceIds);
-
-    /**
-     * Enable the extended metrics for a product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void enable();
-
-    /**
-     * Enable the extended metrics for a product.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> enableAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Enable the extended metrics for a product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> enableAsync();
-
-    /**
-     * Enable the extended metrics for a product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> enableWithServiceResponseAsync();
-    /**
-     * Enable the extended metrics for a product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void enable(String cwKey, String instanceIds);
-
-    /**
-     * Enable the extended metrics for a product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> enableAsync(String cwKey, String instanceIds, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Enable the extended metrics for a product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> enableAsync(String cwKey, String instanceIds);
-
-    /**
-     * Enable the extended metrics for a product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> enableWithServiceResponseAsync(String cwKey, String instanceIds);
-
-    /**
-     * Query the status of extended metrics of those product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void queryStatus();
-
-    /**
-     * Query the status of extended metrics of those product.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> queryStatusAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Query the status of extended metrics of those product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> queryStatusAsync();
-
-    /**
-     * Query the status of extended metrics of those product.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> queryStatusWithServiceResponseAsync();
-    /**
-     * Query the status of extended metrics of those product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void queryStatus(String cwKey, String instanceIds);
-
-    /**
-     * Query the status of extended metrics of those product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> queryStatusAsync(String cwKey, String instanceIds, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Query the status of extended metrics of those product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> queryStatusAsync(String cwKey, String instanceIds);
-
-    /**
-     * Query the status of extended metrics of those product.
-     *
-     * @param cwKey Product key
-     * @param instanceIds Target instance id, string separated by commas
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> queryStatusWithServiceResponseAsync(String cwKey, String instanceIds);
-
-    /**
-     * Get schema list.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws RestException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    void getList();
-
-    /**
-     * Get schema list.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    ServiceFuture<Void> getListAsync(final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Get schema list.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<Void> getListAsync();
-
-    /**
-     * Get schema list.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getListWithServiceResponseAsync();
+    Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync(String cwKey, String prodName);
 
 }

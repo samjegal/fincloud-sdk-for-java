@@ -23,6 +23,12 @@ public interface CloudInsightManagementClient {
     String DEFAULT_BASE_URL = "https://cw.apigw.fin-ntruss.com";
 
     /**
+     * Gets the Charts object to access its operations.
+     * @return the Charts object.
+     */
+    Charts charts();
+
+    /**
      * Gets the Datas object to access its operations.
      * @return the Datas object.
      */
@@ -35,16 +41,52 @@ public interface CloudInsightManagementClient {
     Events events();
 
     /**
-     * Gets the Rules object to access its operations.
-     * @return the Rules object.
+     * Gets the Notifications object to access its operations.
+     * @return the Notifications object.
      */
-    Rules rules();
+    Notifications notifications();
+
+    /**
+     * Gets the Metrics object to access its operations.
+     * @return the Metrics object.
+     */
+    Metrics metrics();
+
+    /**
+     * Gets the RuleGroups object to access its operations.
+     * @return the RuleGroups object.
+     */
+    RuleGroups ruleGroups();
+
+    /**
+     * Gets the MonitorGroups object to access its operations.
+     * @return the MonitorGroups object.
+     */
+    MonitorGroups monitorGroups();
+
+    /**
+     * Gets the MetricGroups object to access its operations.
+     * @return the MetricGroups object.
+     */
+    MetricGroups metricGroups();
+
+    /**
+     * Gets the Monitors object to access its operations.
+     * @return the Monitors object.
+     */
+    Monitors monitors();
 
     /**
      * Gets the Schemas object to access its operations.
      * @return the Schemas object.
      */
     Schemas schemas();
+
+    /**
+     * Gets the Extendeds object to access its operations.
+     * @return the Extendeds object.
+     */
+    Extendeds extendeds();
 
     /**
      * Gets the Servers object to access its operations.
@@ -59,15 +101,21 @@ public interface CloudInsightManagementClient {
     Collectors collectors();
 
     /**
-     * Gets the PluginProcess object to access its operations.
-     * @return the PluginProcess object.
+     * Gets the ProcessPlugins object to access its operations.
+     * @return the ProcessPlugins object.
      */
-    PluginProcess pluginProcess();
+    ProcessPlugins processPlugins();
 
     /**
      * Gets the PortPlugins object to access its operations.
      * @return the PortPlugins object.
      */
     PortPlugins portPlugins();
+
+    /**
+     * Gets the FilePlugins object to access its operations.
+     * @return the FilePlugins object.
+     */
+    FilePlugins filePlugins();
 
 }
